@@ -3,7 +3,7 @@ package org.firstinspires.ftc.teamcode.mechanisms;
 import com.qualcomm.robotcore.eventloop.opmode.OpMode;
 import com.qualcomm.robotcore.hardware.DcMotor;
 
-public class DrivetrainSummer extends OpMode {
+public class DrivetrainSummerTest extends OpMode {
     private DcMotor frontRight, backRight, frontLeft, backLeft;
     @Override
     public void init() {

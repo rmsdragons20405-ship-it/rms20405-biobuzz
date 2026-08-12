@@ -8,7 +8,7 @@ import com.qualcomm.robotcore.hardware.DcMotorSimple;
 import com.qualcomm.robotcore.hardware.Servo;
 
 @TeleOp(name="ViperSlides", group="Summer wood robot")
-public class ViperSlidesSummer extends LinearOpMode {
+public class ViperSlidesSummerTest extends LinearOpMode {
 
     private DcMotorEx viperSlides;
     private Servo bucketTilt;
