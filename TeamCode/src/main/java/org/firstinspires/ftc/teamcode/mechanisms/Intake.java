@@ -11,12 +11,12 @@ public class Intake {
     }
 
     public void intakeOn() {
-        intakeMotor.setPower(1);
+        intakeMotor.setPower(-1);
     }
     public void intakeOff() {
         intakeMotor.setPower(0);
     }
     public void intakeReverse() {
-        intakeMotor.setPower(-1);
+        intakeMotor.setPower(1);
     }
 }
