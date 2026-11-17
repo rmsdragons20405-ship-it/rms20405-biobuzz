@@ -4,23 +4,25 @@ import com.qualcomm.hardware.limelightvision.LLResult;
 import com.qualcomm.hardware.limelightvision.Limelight3A;
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
 import com.qualcomm.robotcore.eventloop.opmode.OpMode;
-import com.qualcomm.robotcore.hardware.DcMotorEx;
+
+import org.firstinspires.ftc.teamcode.mechanisms.AutonMethods;
+import org.firstinspires.ftc.teamcode.mechanisms.Intake;
 
 @Autonomous(name = "LimeLightBlobs", group = "Summer wood robot")
 public class SimpleBlobTracker extends OpMode {
     private Limelight3A limelight3A;
-    private DcMotorEx frontLeft, backLeft, frontRight, backRight, intakeMotor;
+    private AutonMethods drivetrain;
+    private Intake intakeMotor;
+
 
 
     @Override
     public void init() {
         limelight3A = hardwareMap.get(Limelight3A.class, "limelight");
-        limelight3A.pipelineSwitch(9); //detects yellow pollen.
-        frontLeft = hardwareMap.get(DcMotorEx.class, "frontLeft");
-        backLeft = hardwareMap.get(DcMotorEx.class, "backLeft");
-        backRight = hardwareMap.get(DcMotorEx.class, "backRight");
-        frontRight = hardwareMap.get(DcMotorEx.class, "frontRight");
-        intakeMotor = hardwareMap.get(DcMotorEx.class, "intakeMotor");
+        limelight3A.pipelineSwitch(5);
+
+        drivetrain = new AutonMethods(hardwareMap);
+        intakeMotor = new Intake(hardwareMap);
     }
 
     @Override
@@ -30,32 +32,30 @@ public class SimpleBlobTracker extends OpMode {
 
     @Override
     public void loop() {
-        intakeMotor.setPower(1);
         LLResult llResult = limelight3A.getLatestResult();
         double tx = llResult.getTx();
         double ty = llResult.getTy();
         double ta = llResult.getTa();
-        if (llResult != null && llResult.isValid()) {
+        if (llResult.isValid()) {
             if (tx > 2) {
-                frontLeft.setPower(0.5);
-                backLeft.setPower(0.5);
-                frontRight.setPower(0);
-                backRight.setPower(0);
+                drivetrain.pivotRight();
+                telemetry.addData("Direction", "Right");
+
             } else if (tx < -2) {
-                frontRight.setPower(0.5);
-                backRight.setPower(0.5);
-                frontLeft.setPower(0);
-                backLeft.setPower(0);
+                drivetrain.pivotLeft();
+                telemetry.addData("Direction", "Left");
+
             } else if (tx < 3 && tx > 0) {
-                frontLeft.setPower(0.5);
-                frontRight.setPower(0.5);
-                backLeft.setPower(0.5);
-                backRight.setPower(0.5);
+                drivetrain.forwardSlow();
+                telemetry.addData("Direction", "Forward");
+
             } else if (tx > -3 && tx < 0) {
-                frontLeft.setPower(0.5);
-                frontRight.setPower(0.5);
-                backLeft.setPower(0.5);
-                backRight.setPower(0.5);
+                drivetrain.forwardSlow();
+                telemetry.addData("Direction", "Forward");
+
+            }else {
+                drivetrain.tankTurnLeft();
+                telemetry.addData("Direction", "Searching");
             }
         }
 

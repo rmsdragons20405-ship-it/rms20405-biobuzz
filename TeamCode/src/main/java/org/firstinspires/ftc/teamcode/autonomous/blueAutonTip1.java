@@ -46,8 +46,10 @@ public class blueAutonTip1 extends OpMode {
     public void statePathUpdate() {
         switch(pathState) {
             case SHOOT_PRELOAD:
+                launcherMotor.launcherOn();
                 if (!follower.isBusy() && pathTimer.getElapsedTimeSeconds() > 3) {
-                    //TODO ADD MECHANISMS LOGIC HERE
+                    transferMotor.transferOn();
+                    intakeMotor.intakeOn();
                 }
                 setPathState(PathState.DRIVE_TO_PARK);
                 break;
@@ -78,7 +80,6 @@ public class blueAutonTip1 extends OpMode {
         intakeMotor = new Intake(hardwareMap);
         transferMotor = new Transfer(hardwareMap);
         launcherMotor = new Launcher(hardwareMap);
-        // TODO add in any other mechanisms like launcher, limelight, etc.
         buildPaths();
         follower.setPose(startPose);
     }
@@ -92,7 +93,9 @@ public class blueAutonTip1 extends OpMode {
 
     @Override
     public void loop() {
-        //TODO TURN ON LAUNCHER HERE
+        intakeMotor.intakeOn();
+        transferMotor.transferOn();
+        launcherMotor.launcherOn();
         follower.update(); //THIS IS THE MOST IMPORTANT LINE OF THE CODE! IT MAKES EVERYTHING RUN!!!!!
         statePathUpdate();
 

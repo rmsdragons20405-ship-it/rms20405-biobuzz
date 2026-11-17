@@ -1,5 +1,6 @@
 package org.firstinspires.ftc.teamcode.teleop;
 
+import com.pedropathing.util.Timer;
 import com.qualcomm.robotcore.eventloop.opmode.OpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 
@@ -18,12 +19,22 @@ public class biobuzzTeleOpV1 extends OpMode {
 
     private Launcher launcherMotor;
 
+    //Keep if needed. This is a timer to use when necessary
+    private Timer timer;
+
+    private Launcher power;
+
     @Override
     public void init() {
         drivetrain = new MecanumDrivetrain(hardwareMap);
         intakeMotor = new Intake(hardwareMap);
         transferMotor = new Transfer(hardwareMap);
         launcherMotor = new Launcher(hardwareMap);
+        //Keep if needed. This is a timer to use when necessary
+        timer = new Timer();
+        timer.resetTimer();
+
+
     }
 
     @Override
@@ -34,37 +45,36 @@ public class biobuzzTeleOpV1 extends OpMode {
     @Override
     public void loop() {
 
+
         //DRIVETRAIN CODE - SEE DRIVETRAIN MECHANISM CODE
         drivetrain.drive(-gamepad1.left_stick_y, gamepad1.right_stick_x, gamepad1.left_stick_x);
 
         //INTAKE CODE - SEE INTAKE MECHANISM CODE
         if (gamepad2.a) {
             intakeMotor.intakeOn();
+            launcherMotor.launcherOn();
         }
         if (gamepad2.b) {
             intakeMotor.intakeOff();
-        }
-        if (gamepad2.right_trigger_pressed) {
-            intakeMotor.intakeReverse();
+            transferMotor.transferOff();
+            launcherMotor.launcherOff();
         }
         //TRANSFER CODE - SEE TRANSFER MECHANISM CODE
         if (gamepad2.x) {
-            transferMotor.transferOn();
-        }
-        if (gamepad2.y) {
-            transferMotor.transferOff();
-        }
-        if (gamepad2.left_trigger_pressed) {
             transferMotor.transferReverse();
+            intakeMotor.intakeReverse();
+            launcherMotor.launcherReverse();
         }
-
         //LAUNCHER CODE - SEE LAUNCHER MECHANISM CODE
 
         if (gamepad2.left_bumper) {
-            launcherMotor.launcherOn();
+            transferMotor.transferOn();
         }
         if (gamepad2.right_bumper) {
-            launcherMotor.launcherOff();
+            transferMotor.transferOff();
         }
+
     }
+
+
 }

@@ -12,12 +12,12 @@ public class Transfer {
 
     }
     public void transferOn() {
-        transferMotor.setPower(1);
+        transferMotor.setPower(0.74);
     }
     public void transferOff() {
         transferMotor.setPower(0);
     }
     public void transferReverse() {
-        transferMotor.setPower(-1);
+        transferMotor.setPower(-0.75);
     }
 }

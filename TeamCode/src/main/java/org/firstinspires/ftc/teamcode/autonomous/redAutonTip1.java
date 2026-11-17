@@ -47,8 +47,10 @@ public class redAutonTip1 extends OpMode {
     public void statePathUpdate() {
         switch(pathState) {
             case SHOOT_PRELOAD:
+                launcherMotor.launcherOn();
                 if (!follower.isBusy() && pathTimer.getElapsedTimeSeconds() > 3) {
-                    //TODO ADD LOGIC HERE FOR THE MECHANISMS
+                    transferMotor.transferOn();
+                    intakeMotor.intakeOn();
                 }
                 setPathState(PathState.DRIVE_TO_PARK);
                 break;
@@ -57,7 +59,7 @@ public class redAutonTip1 extends OpMode {
                     follower.followPath(driveStart_Park, true);
                 }
                 if (!follower.isBusy()) {
-                    telemetry.addLine("Done with auton! :)");
+                    telemetry.addLine("Done with auton! WOOHOO!");
                 }
                 break;
             default:
@@ -92,7 +94,6 @@ public class redAutonTip1 extends OpMode {
 
     @Override
     public void loop() {
-        //TODO TURN LAUNCHER ON HERE
         follower.update(); //THIS IS THE MOST IMPORTANT LINE OF THE CODE! IT MAKES EVERYTHING RUN!!!!!
         statePathUpdate();
 

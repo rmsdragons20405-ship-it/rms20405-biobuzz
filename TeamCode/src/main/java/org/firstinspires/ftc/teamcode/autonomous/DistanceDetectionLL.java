@@ -11,7 +11,7 @@ import org.firstinspires.ftc.robotcore.external.navigation.AngleUnit;
 import org.firstinspires.ftc.robotcore.external.navigation.Pose3D;
 import org.firstinspires.ftc.robotcore.external.navigation.YawPitchRollAngles;
 @Autonomous(name = "AprilTag")
-public class AprilTagMove1 extends OpMode {
+public class DistanceDetectionLL extends OpMode {
     private Limelight3A limelight3A;
     private IMU imu;
 
