@@ -1,5 +1,6 @@
 package org.firstinspires.ftc.teamcode.teleop;
 
+import com.qualcomm.robotcore.eventloop.opmode.Disabled;
 import com.qualcomm.robotcore.eventloop.opmode.OpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 
@@ -7,7 +8,7 @@ import org.firstinspires.ftc.teamcode.mechanisms.Bucket;
 import org.firstinspires.ftc.teamcode.mechanisms.Intake;
 import org.firstinspires.ftc.teamcode.mechanisms.MecanumDrivetrain;
 import org.firstinspires.ftc.teamcode.mechanisms.ViperSlides;
-
+@Disabled
 @TeleOp(name = "bioTeleopV2", group = "Summer wood robot")
 public class bioTeleopV2 extends OpMode {
     private MecanumDrivetrain drivetrain;
