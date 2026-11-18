@@ -35,6 +35,7 @@ public class SimpleBlobTracker extends OpMode {
         double tx = llResult.getTx();
         double ty = llResult.getTy();
         double ta = llResult.getTa();
+
         if (llResult != null && llResult.isValid()) {
             if (tx > 2) {
                 frontLeft.setPower(0.5);

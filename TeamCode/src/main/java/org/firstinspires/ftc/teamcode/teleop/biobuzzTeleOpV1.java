@@ -1,6 +1,7 @@
 package org.firstinspires.ftc.teamcode.teleop;
 
 import com.pedropathing.util.Timer;
+import com.qualcomm.robotcore.eventloop.opmode.Disabled;
 import com.qualcomm.robotcore.eventloop.opmode.OpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 import com.qualcomm.robotcore.hardware.DcMotor;
@@ -11,7 +12,7 @@ import org.firstinspires.ftc.teamcode.mechanisms.Launcher;
 import org.firstinspires.ftc.teamcode.mechanisms.MecanumDrivetrain;
 import org.firstinspires.ftc.teamcode.mechanisms.ServoGate;
 import org.firstinspires.ftc.teamcode.mechanisms.Transfer;
-
+@Disabled
 @TeleOp(name = "biobuzzTeleopV1")
 public class biobuzzTeleOpV1 extends OpMode {
     // Imports
@@ -26,9 +27,9 @@ public class biobuzzTeleOpV1 extends OpMode {
     private boolean isLauncherRunning = false;
     public double highVelocity = 1350;
     public double lowVelocity = 1350;
-    double P = 10;
-    double F = 13.95;
-    double[] stepSizes = {10.0, 1.0, 0.1, 0.001, 0.0001};
+    double P = 16.259;
+    double F = 12.908;
+    double[] stepSizes = {10.0, 1.0, 0.1, 0.01, 0.001};
     int stepIndex = 1;
     double curTargetVelocity = highVelocity;
     private Timer timer;
@@ -40,7 +41,7 @@ public class biobuzzTeleOpV1 extends OpMode {
         transferMotor = new Transfer(hardwareMap);
         launcherMotor = new Launcher(hardwareMap);
         counterRoller = new Launcher(hardwareMap);
-        PIDFCoefficients pidfCoefficients = new PIDFCoefficients(P, 6 ,16, F);
+        PIDFCoefficients pidfCoefficients = new PIDFCoefficients(P, 16.259 ,12.908, F);
         launcherMotor.setPIDFCoefficients(DcMotor.RunMode.RUN_USING_ENCODER, pidfCoefficients);
         bench.init(hardwareMap);
 // only use if necessary
@@ -85,6 +86,7 @@ public class biobuzzTeleOpV1 extends OpMode {
             P += stepSizes [stepIndex];
         }
         if (gamepad1.dpadDownWasPressed()) {
+            P -= stepSizes [stepIndex];
         }
 
 // everything on
